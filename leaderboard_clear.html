@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f4f4f4; }
+        button { padding: 10px 20px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Leaderboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard"></tbody>
+        </table>
+        <button onclick="clearLeaderboard()">Clear Leaderboard</button>
+    </div>
+
+    <script>
+        function loadLeaderboard() {
+            const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+            const leaderboardElement = document.getElementById('leaderboard');
+            
+            leaderboard.forEach(entry => {
+                const row = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                nameCell.textContent = entry.name;
+                const scoreCell = document.createElement('td');
+                scoreCell.textContent = entry.correctAnswers;
+
+                row.appendChild(nameCell);
+                row.appendChild(scoreCell);
+                leaderboardElement.appendChild(row);
+            });
+        }
+
+        function clearLeaderboard() {
+            localStorage.removeItem('leaderboard');
+            //location.reload(); // Reload the page to reflect the cleared leaderboard
+        }
+
+        loadLeaderboard();
+    </script>
+</body>
+</html>

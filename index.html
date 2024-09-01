@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Ecology Quiz</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 50px; 
+            background: #afb0b0;
+            color: #fff;
+        }
+        .container { 
+            max-width: 500px; 
+            margin: 0 auto; 
+            background-color: rgba(4, 109, 247, 0.793);
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 15px; 
+            margin: 10px auto; 
+            width: 80%; 
+            max-width: 400px;
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.2em;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            display: block;
+        }
+        input:focus {
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 0 10px #0072ff;
+        }
+        button { 
+            padding: 10px 20px; 
+            margin-top: 20px;
+            width: auto; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1.2em; 
+            background-color: #fff; 
+            color: #0072ff; 
+            cursor: pointer; 
+            transition: background-color 0.3s, box-shadow 0.3s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button:hover { 
+            background-color: #01f546; 
+            color: #fff;
+            box-shadow: 0 0 20px #01f546;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Wildlife Ecology Quiz</h1>
+        <input type="text" id="name" placeholder="Enter your Name" required>
+        <input type="text" id="registerNumber" placeholder="Enter your Register Number" required>
+        <button onclick="proceedToQuiz()">Proceed to Test</button>
+    </div>
+
+    <script>
+        function proceedToQuiz() {
+            const name = document.getElementById('name').value;
+            const registerNumber = document.getElementById('registerNumber').value;
+
+            if (name && registerNumber) {
+                localStorage.setItem('quizName', name);
+                localStorage.setItem('quizRegisterNumber', registerNumber);
+                window.location.href = 'quiz.html';
+            } else {
+                alert('Please enter both your name and register number.');
+            }
+        }
+    </script>
+</body>
+</html>

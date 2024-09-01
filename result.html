@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .container { max-width: 500px; margin: 0 auto; }
+        button { padding: 10px 20px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Quiz Result</h2>
+        <div id="result"></div>
+        <button onclick="viewAnalysis()">View Analysis</button>
+        <button onclick="viewLeaderboard()">View Leaderboard</button>
+    </div>
+
+    <script>
+        function displayResult() {
+            const correctAnswers = localStorage.getItem('quizResult');
+            const totalQuestions = 60; // Total number of questions should match the quiz
+            document.getElementById('result').textContent = `You got ${correctAnswers} out of ${totalQuestions} correct.`;
+
+            const name = localStorage.getItem('quizName');
+            saveResult(name, correctAnswers);
+        }
+
+        function saveResult(name, correctAnswers) {
+            let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+            
+            // Check if the name already exists in the leaderboard
+            const existingEntryIndex = leaderboard.findIndex(entry => entry.name === name);
+            
+            if (existingEntryIndex === -1) {
+                // If the name doesn't exist, add the new entry
+                leaderboard.push({ name, correctAnswers });
+            } else {
+                // If the name exists, update the score (if needed)
+                leaderboard[existingEntryIndex].correctAnswers = correctAnswers;
+            }
+
+            localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+        }
+
+        function viewAnalysis() {
+            window.location.href = 'analysis.html';
+        }
+
+        function viewLeaderboard() {
+            window.location.href = 'leaderboard.html';
+        }
+
+        displayResult();
+    </script>
+</body>
+</html>
